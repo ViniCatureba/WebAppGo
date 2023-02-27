@@ -30,18 +30,15 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{range .}}
                         <tr>
-                            <td>Nike</td>
-                            <td>Super confy</td>
-                            <td>159.99</td>
-                            <td>7</td>
+                            <td>{{.Name}}</td>
+                            <td>{{.Description}}</td>
+                            <td>{{.Price}}</td>
+                            <td>{{.Amount}}</td>
                         </tr>
-                        <tr>
-                            <td>Addidas</td>
-                            <td>Good for sports</td>
-                            <td>129.99</td>
-                            <td>5</td>
-                        </tr>
+                        {{end}}
+                       
                     </tbody>
                 </table>
             </div>
