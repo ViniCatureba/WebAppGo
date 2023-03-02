@@ -40,3 +40,15 @@ func SearchForProducts() []Product {
 	defer db.Close()
 	return products
 }
+
+func CreateNewProduct(name, description string, price float64, amount int) {
+	db := db.DataBaseConection()
+	
+	insertData, err := db.Prepare("Insert into shoes(name, description, price, amount) values($1, $2, $3, $4)")
+
+	if err != nil{
+		panic(err.Error())
+	}
+	insertData.Exec(name, description, price, amount)
+	defer db.Close()
+}
