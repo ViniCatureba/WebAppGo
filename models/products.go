@@ -30,6 +30,7 @@ func SearchForProducts() []Product {
 		if err != nil {
 			panic(err.Error())
 		}
+		p.Id = id
 		p.Name = name
 		p.Description = description
 		p.Price = price
@@ -43,12 +44,24 @@ func SearchForProducts() []Product {
 
 func CreateNewProduct(name, description string, price float64, amount int) {
 	db := db.DataBaseConection()
-	
+
 	insertData, err := db.Prepare("Insert into shoes(name, description, price, amount) values($1, $2, $3, $4)")
 
-	if err != nil{
+	if err != nil {
 		panic(err.Error())
 	}
 	insertData.Exec(name, description, price, amount)
+	defer db.Close()
+}
+
+func DeleteProduct(id string) {
+	db := db.DataBaseConection()
+	deleteProduct, err := db.Prepare("delete from shoes where id=$1")
+
+	if err != nil {
+		panic(err.Error())
+	}
+
+	deleteProduct.Exec(id)
 	defer db.Close()
 }
